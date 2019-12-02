@@ -1,0 +1,56 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="https://www.howtodoinjava.com/xml/school" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="https://www.howtodoinjava.com/xml/school" targetNamespace="https://www.howtodoinjava.com/xml/school">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="https://www.howtodoinjava.com/xml/school">
+            <xs:element name="FootballerDetailsRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="name" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="FootballerDetailsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Footballer" type="tns:Footballer"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="Footballer">
+                <xs:sequence>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="club" type="xs:string"/>
+                    <xs:element name="country" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="FootballerDetailsResponse">
+        <wsdl:part element="tns:FootballerDetailsResponse" name="FootballerDetailsResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="FootballerDetailsRequest">
+        <wsdl:part element="tns:FootballerDetailsRequest" name="FootballerDetailsRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="FootballerDetailsPort">
+        <wsdl:operation name="FootballerDetails">
+            <wsdl:input message="tns:FootballerDetailsRequest" name="FootballerDetailsRequest"> </wsdl:input>
+            <wsdl:output message="tns:FootballerDetailsResponse" name="FootballerDetailsResponse"> </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="FootballerDetailsPortSoap11" type="tns:FootballerDetailsPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="FootballerDetails">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="FootballerDetailsRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="FootballerDetailsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="FootballerDetailsPortService">
+        <wsdl:port binding="tns:FootballerDetailsPortSoap11" name="FootballerDetailsPortSoap11">
+            <soap:address location="http://localhost:7111/service/footballer-details"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
